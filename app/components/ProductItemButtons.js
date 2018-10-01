@@ -67,7 +67,7 @@ class ProductItemButtons extends Component {
       });
     }
 
-    addProductToCart(id, quantity);
+    addProductToCart(id, parseInt(quantity, 10));
   }
 
   renderActionCartButton() {
