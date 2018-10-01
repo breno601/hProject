@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import ProductItemButtons from './ProductItemButtons';
+import ProductItemButtons from '../containers/ProductItemButtons';
 
 const ProductItem = (props) => {
   const {

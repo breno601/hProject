@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import _ from 'lodash';
 import shortid from 'shortid';
-import ProductRow from './ProductRow';
+import ProductRow from '../components/ProductRow';
 import '../assets/scss/main.scss';
 import * as actions from '../actions';
 

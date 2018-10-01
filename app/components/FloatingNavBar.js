@@ -1,6 +1,6 @@
 import PropTypes from 'prop-types';
 import React from 'react';
-import Cart from './Cart';
+import Cart from '../containers/Cart';
 import Menu from './Menu';
 
 const FloatingNav = (props) => {

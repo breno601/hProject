@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import ProductTable from './ProductTable';
+import ProductTable from '../containers/ProductTable';
 import NavBar from './NavBar';
 import PromoBar from './PromoBar';
 import FloatingNav from './FloatingNavBar';
