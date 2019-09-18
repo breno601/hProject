@@ -1,0 +1,43 @@
+import requests
+import pyodbc
+import json
+
+cuia_url = "https://tst-customer-unique-identifier.beerwulf.com/api/"
+headers_cuia = {"Content-type": "application/json", "ApiKey": "jBQG!7uhfBwneDDYGnjPVzRYUKGMo-p@!zYMWbk66WqEcKWs4A"}
+
+def send_batch_to_cuia(batch):
+    bulk_url = cuia_url + "Identifiers/BulkInsert"
+    resp = requests.post(bulk_url, json=batch, headers=headers_cuia)
+    if resp.status_code != 200:
+        print("Issue sending batch to CUIA. Action needed. Error code: {} Reason:".format(resp.status_code))
+        return
+
+    print("Finished batch")
+
+
+server = 'brwlf-tst-sqlserver-server-01.database.windows.net'
+database = 'brwlf-tst-episerver-commerce'
+username = 'valtechnl_sa'
+password = 'hooks-he9q33'
+driver = '{ODBC Driver 17 for SQL Server}'
+cnxn = pyodbc.connect('DRIVER='+driver+';SERVER='+server+';PORT=1433;DATABASE='+database+';UID='+username+';PWD='+ password+';Trusted_connection=no')
+cursor = cnxn.cursor()
+cursor.execute("SELECT * FROM [brwlf-tst-episerver-commerce].[dbo].[cls_contact]")
+row = cursor.fetchone()
+i = 0
+list_to_send = []
+row = cursor.fetchone()
+while row:
+    d = {}
+    d['Email'] = row[10]
+    d['FirstName'] = row[7]
+    d['LastName'] = row[6]
+    d['GenericIdentifiers'] = { row[0]: "1"}
+    list_to_send.append(d)
+
+    if (len(list_to_send) == 999):
+        send_batch_to_cuia(list_to_send)
+        print(len(list_to_send))
+        list_to_send = []
+
+    row = cursor.fetchone()
