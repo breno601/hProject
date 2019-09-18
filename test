@@ -22,7 +22,7 @@ password = 'hooks-he9q33'
 driver = '{ODBC Driver 17 for SQL Server}'
 cnxn = pyodbc.connect('DRIVER='+driver+';SERVER='+server+';PORT=1433;DATABASE='+database+';UID='+username+';PWD='+ password+';Trusted_connection=no')
 cursor = cnxn.cursor()
-cursor.execute("SELECT * FROM [brwlf-tst-episerver-commerce].[dbo].[cls_contact]")
+cursor.execute("SELECT * FROM [brwlf-tst-episerver-commerce].[dbo].[cls_contact] where Email != ''")
 row = cursor.fetchone()
 i = 0
 list_to_send = []
